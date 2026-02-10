@@ -1,79 +1,63 @@
-import * as React from "react"
+"use client"
 
-import { SearchForm } from "@/components/search-form"
-import { VersionSwitcher } from "@/components/version-switcher"
+import * as React from "react"
+import Link from "next/link"
+import categoryService from "./modules/categoryService"
+import { Category } from "@/types"
+
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
 } from "@/components/ui/sidebar"
+import { SearchForm } from "@/components/search-form"
 
-// This is sample data.
-const data = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-      items: [
-        {
-          title: "Installation",
-          url: "#",
-        },
-        {
-          title: "Project Structure",
-          url: "#",
-        },
-      ],
-    },
-    
-      
-   
-   
-  ],
+interface AppSidebarProps {
+  categories: Category[]
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ categories }: AppSidebarProps) {
+  const [search, setSearch] = React.useState("")
+  const [data, setData] = React.useState<Category[]>(categories)
+  const [loading, setLoading] = React.useState(false)
+
+  React.useEffect(() => {
+    const fetchCategories = async () => {
+      setLoading(true)
+      const result = await categoryService.getCategory({ search })
+      setData(result)
+      setLoading(false)
+    }
+
+    fetchCategories()
+  }, [search])
+
   return (
-    <Sidebar {...props}
-    className="top-16 h-[calc(100vh-4rem)]"
-    >
+    <Sidebar className="top-16 h-[calc(100vh-4rem)]">
       <SidebarHeader>
-        <VersionSwitcher
-          versions={data.versions}
-          defaultVersion={data.versions[0]}
-        />
-        {/* <SearchForm /> */}
+        <SearchForm value={search} onChange={setSearch} />
       </SidebarHeader>
+
       <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
-          <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
-                      <a href={item.url}>{item.title}</a>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
+        {loading && (
+          <p className="px-4 text-sm text-muted-foreground">Loading...</p>
+        )}
+
+        <SidebarMenu>
+          {data.map((category) => (
+            <SidebarMenuItem key={category.id}>
+              <SidebarMenuButton asChild>
+                <Link href={`/categoryPost/${category.id}`}>
+                  {category.name}
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
       </SidebarContent>
-      <SidebarRail />
     </Sidebar>
   )
 }
-
-

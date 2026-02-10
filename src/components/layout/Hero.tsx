@@ -15,18 +15,24 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { HomeCarouselSpacing } from "./HomeCarosol"
-import { authClient } from "@/lib/auth-client"
 import Getmedicine from "./HomeOther/Getmedicine"
+
+import categoryService from "../modules/categoryService"
 
 
 
 export default async function HeroPage() {
-    const getSession = await authClient.getSession()
-    console.log(getSession);
+  // const getSession = await authClient.getSession()
+  // console.log(getSession);
+  const { data:categories } = await categoryService.getCategory({
+    search:""
+  })
+ 
+
   return (
 
     <SidebarProvider >
-      <AppSidebar />
+      <AppSidebar categories={categories || []}/>
       <SidebarInset className="mt-14 border px-8">
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
@@ -49,6 +55,7 @@ export default async function HeroPage() {
         <div className="">
           <HomeCarouselSpacing></HomeCarouselSpacing>
           <Getmedicine ></Getmedicine>
+         
         </div>
       </SidebarInset>
     </SidebarProvider>

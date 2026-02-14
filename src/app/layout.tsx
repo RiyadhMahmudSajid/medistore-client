@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/provider/ThemesProvider";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryProvider } from "@/provider/QueryClientProvider";
+import CartProvider from "@/provider/CartProvider";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,8 +35,18 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <QueryProvider>
+
+            <CartProvider>
+
+              {children}
+            </CartProvider>
+
+          </QueryProvider>
+
         </ThemeProvider>
+
+
 
 
       </body>

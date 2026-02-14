@@ -34,14 +34,18 @@ export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => {
       setLoading(false)
     }
 
-    const delay = setTimeout(fetchMedicine, 400) 
+    const delay = setTimeout(fetchMedicine, 400)
     return () => clearTimeout(delay)
   }, [search])
+
+
+
+
 
   return (
     <NavigationMenu {...props}>
       <NavigationMenuList className="flex gap-4">
-        <NavigationMenuItem className="relative w-[400px]">
+        <NavigationMenuItem className="relative w-[500px]">
           <div className="relative w-full flex items-center">
             <button className="absolute left-0 bg-primary h-11 w-12 flex items-center justify-center rounded-l-md">
               <Search className="h-5 w-5 text-primary-foreground" />
@@ -56,7 +60,7 @@ export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => {
             />
           </div>
 
-          {/* 🔽 Search Result Dropdown */}
+      
           {search && (
             <div className="absolute top-12 z-50 w-full rounded-md border bg-background shadow">
               {loading && (

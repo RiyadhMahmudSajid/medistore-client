@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+
 import { Logo } from "@/components/logo";
 import { NavMenu } from "@/components/nav-menu";
 import { NavigationSheet } from "@/components/navigation-sheet";
@@ -6,7 +6,13 @@ import { ChevronDown, ShoppingCart, User } from "lucide-react";
 import { ModeToggle } from "./modeTogol";
 import Link from "next/link";
 
+import { Button } from "../ui/button";
+import CartCounterWrapper from "./HomeOther/CartCounterWrapper";
+
+
 const Navbar = () => {
+
+
   return (
     <nav className="fixed inset-x-0 top-0 z-50 border-b bg-background/80 backdrop-blur-md shadow-sm">
 
@@ -24,20 +30,7 @@ const Navbar = () => {
 
 
         <div className="flex items-center gap-1 sm:gap-3">
-          <div className="relative group cursor-pointer p-2 rounded-xl bg-secondary hover:bg-primary/10 transition-all duration-300 border border-transparent hover:border-primary/20">
-
-
-            <ShoppingCart
-              size={25}
-              strokeWidth={2}
-              className="text-foreground transition-transform duration-300 group-hover:scale-110 group-active:scale-95"
-            />
-
-
-            <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground font-black border-2 border-background shadow-md">
-              0
-            </span>
-          </div>
+          <CartCounterWrapper></CartCounterWrapper>
           <Button
             variant="ghost"
             className="hidden sm:flex items-center gap-3 h-12 px-4 rounded-xl bg-secondary/50 hover:bg-primary/10 border border-transparent hover:border-primary/20 transition-all group"

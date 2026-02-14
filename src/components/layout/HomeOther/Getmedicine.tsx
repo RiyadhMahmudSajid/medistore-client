@@ -41,11 +41,12 @@ const Getmedicine = async () => {
                                 <CardDescription>
                                     {medicine.description}
                                 </CardDescription>
+                                <div className="font-bold">{medicine.price}</div>
                             </CardHeader>
-                            <CardFooter>
+                            <CardFooter className="flex justify-between">
                                 <Link href={`/medicine/${medicine.id}`}>
 
-                                <Button className="w-full">View Event</Button>
+                                <Button className="flex-1">View Event</Button>
                                 </Link>
                                 
                             </CardFooter>

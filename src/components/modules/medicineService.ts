@@ -1,5 +1,4 @@
 import { env } from "@/env";
-import { error } from "console";
 
 
 const API_URL = env.NEXT_PUBLIC_API_URL

@@ -14,6 +14,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { SearchForm } from "@/components/search-form"
+import { useQuery } from "@tanstack/react-query"
 
 interface AppSidebarProps {
   categories: Category[]
@@ -21,20 +22,20 @@ interface AppSidebarProps {
 
 export function AppSidebar({ categories }: AppSidebarProps) {
   const [search, setSearch] = React.useState("")
-  const [data, setData] = React.useState<Category[]>(categories)
-  const [loading, setLoading] = React.useState(false)
 
-  React.useEffect(() => {
-    const fetchCategories = async () => {
-      setLoading(true)
-      const result = await categoryService.getCategory({ search })
-      setData(result)
-      setLoading(false)
-    }
 
-    fetchCategories()
-  }, [search])
 
+  const { data = []  } = useQuery({
+    queryKey: ["categories", search],
+    queryFn: () => categoryService.getCategory({ search }),
+     
+    initialData: categories,
+  
+  })
+
+   console.log("data is",data)
+
+  
   return (
     <Sidebar className="top-16 h-[calc(100vh-4rem)]">
       <SidebarHeader>
@@ -42,12 +43,8 @@ export function AppSidebar({ categories }: AppSidebarProps) {
       </SidebarHeader>
 
       <SidebarContent>
-        {loading && (
-          <p className="px-4 text-sm text-muted-foreground">Loading...</p>
-        )}
-
         <SidebarMenu>
-          {data.map((category) => (
+          {data?.map((category: Category) => (
             <SidebarMenuItem key={category.id}>
               <SidebarMenuButton asChild>
                 <Link href={`/categoryPost/${category.id}`}>

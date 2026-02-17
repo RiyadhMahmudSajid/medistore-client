@@ -27,7 +27,7 @@ const Getmedicine = async () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
             {
-                data?.AllMedicine?.map((medicine: Medicine) => (
+                data?.AllMedicine?.slice(0, 6).map((medicine: Medicine) => (
 
                     <div key={medicine.id}>
                         <Card className="relative mx-auto w-full max-w-sm pt-0">

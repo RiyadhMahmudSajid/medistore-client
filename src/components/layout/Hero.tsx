@@ -22,8 +22,7 @@ import categoryService from "../modules/categoryService"
 
 
 export default async function HeroPage() {
-  // const getSession = await authClient.getSession()
-  // console.log(getSession);
+  
   const { data:categories } = await categoryService.getCategory({
     search:""
   })

@@ -1,82 +1,159 @@
 "use client"
-import { cn } from "@/lib/utils"
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+
 import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-} from "@/components/ui/field"
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import { useForm } from "@tanstack/react-form"
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "./ui/field"
+import * as z from "zod"
 import { authClient } from "@/lib/auth-client"
+import { toast } from "sonner"
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+const formSchema = z.object({
 
- const handleGoogleLogin = async ()=>{
-     const data = await authClient.signIn.social({
-      provider:"google",
-      callbackURL:"http://localhost:3000"
-     })
-     console.log(data);
- } 
+  email: z.string()
+    .min(1, "Please select a role"),
+  password: z
+    .string()
+    .min(8, "Description must be at least 8 characters."),
+ 
+})
+
+
+export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
+  const handleGoogleLogin = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "http://localhost:3000"
+    })
+    console.log(data);
+  }
+
+  const form = useForm({
+    defaultValues: {
+   
+      email: "",
+      password: "",
+   
+    },
+    validators: {
+      onSubmit: formSchema,
+    },
+    onSubmit: async ({ value }) => {
+      console.log(value);
+      const tostId = toast.loading("LogIn User")
+      try {
+       
+        const { data, error } = await authClient.signIn.email(value)
+        console.log(data);
+        console.log(error);
+        if (error) {
+          toast.error(error.message, { id: tostId })
+        }
+        toast.success("LogIn Successfully", { id: tostId })
+      } catch (err) {
+        toast.error("Some thing went wrong", { id: tostId })
+
+      }
+    }
+  })
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form>
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
-              </Field>
-              <Field>
-                <div className="flex items-center">
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </a>
-                </div>
-                <Input id="password" type="password" required />
-              </Field>
-              <Field>
-                <Button type="submit">Login</Button>
-                <Button onClick={()=>handleGoogleLogin()} variant="outline" type="button">
-                  Login with Google
-                </Button>
-                <FieldDescription className="text-center">
-                  Don&apos;t have an account? <Link href='/signup'>Sign up</Link>
-                </FieldDescription>
-              </Field>
-            </FieldGroup>
-          </form>
-        </CardContent>
-      </Card>
-    </div>
+    <Card {...props}>
+      <CardHeader>
+        <CardTitle>Create an account</CardTitle>
+        <CardDescription>
+          Enter your information below to create your account
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form
+          id="signin-form"
+          onSubmit={(e) => {
+            e.preventDefault()
+            form.handleSubmit()
+          }}>
+
+          <FieldGroup>
+
+            <form.Field
+              name="email"
+              children={(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid
+                return (
+                  <Field data-invalid={isInvalid}>
+                    <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                    <Input
+                      id={field.name}
+                      type="email"
+                      value={field.state.value}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                    ></Input>
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
+                  </Field>)
+              }}
+            />
+            <form.Field
+              name="password"
+              children={(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid
+                return (
+                  <Field data-invalid={isInvalid}>
+                    <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+                    <Input
+                      id={field.name}
+                      type="password"
+                      value={field.state.value}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                    ></Input>
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
+                  </Field>)
+              }}
+            />
+
+
+          </FieldGroup>
+
+        </form>
+      </CardContent>
+      <CardFooter className="flex flex-col gap-2">
+        <Button className="w-full" form="signin-form" type="submit">
+          Login
+        </Button>
+        <Button
+        className="w-full"
+        onClick={() => handleGoogleLogin()} variant="outline" type="button">
+          Login with Google
+        </Button>
+        <FieldDescription className="text-center">
+          Don&apos;t have an account? <Link href='/signup'>Sign up</Link>
+        </FieldDescription>
+      </CardFooter>
+    </Card>
   )
 }

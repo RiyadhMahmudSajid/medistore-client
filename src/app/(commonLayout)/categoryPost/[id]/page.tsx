@@ -4,11 +4,7 @@ import { Medicine } from "@/types";
 
 
 
-export default async function MedicineDetailsPage({
-    params,
-}: {
-    params: Promise<{ id: string }>;
-}) {
+export default async function MedicineDetailsPage({params,}: {params: Promise<{ id: string }>;}) {
     const { id } = await params;
 
     const { data: category } = await categoryService.getCategoryById(id);

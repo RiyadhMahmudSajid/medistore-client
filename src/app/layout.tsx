@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/provider/ThemesProvider";
 import { QueryProvider } from "@/provider/QueryClientProvider";
 import CartProvider from "@/provider/CartProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 
 const geistSans = Geist({
@@ -40,6 +41,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
             <CartProvider>
 
               {children}
+              <Toaster richColors />
             </CartProvider>
 
           </QueryProvider>

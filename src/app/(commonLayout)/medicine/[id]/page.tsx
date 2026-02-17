@@ -5,6 +5,13 @@ import MedicineDetailsClient from "./MedicineDetailsClient";
 import { Medicine } from "@/types";
 
 
+export async function generateStaticParams() {
+  const { data } = await medicineService.getAllMedicine()
+
+  return data?.AllMedicine?.map((medicine: Medicine) => ({ id: medicine.id })).splice(0,6)
+
+}
+
 export default async function MedicineDetailsPage({
   params,
 }: {

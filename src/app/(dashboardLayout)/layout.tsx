@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar"
+import userService from "@/components/modules/userService"
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -15,10 +16,13 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 
-export default function Page({ admindashboard, customerdashboard, sellerdashboard }: { admindashboard: React.ReactNode; customerdashboard: React.ReactNode; sellerdashboard: React.ReactNode }) {
+export default async function Page({ admindashboard, customerdashboard, sellerdashboard }: { admindashboard: React.ReactNode; customerdashboard: React.ReactNode; sellerdashboard: React.ReactNode }) {
 
+    
+  const {data} = await userService.getSession()
+  console.log(data);
     const userInfo = {
-        role: "ADMIN"
+        role: data.user.role
     }
     return (
         <SidebarProvider>

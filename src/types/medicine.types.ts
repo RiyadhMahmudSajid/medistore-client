@@ -10,5 +10,6 @@ export interface Medicine {
   manufacturer: string;    
   image: string;           
   stock: number;           
-  sellerId?: string;        
+  sellerId?: string;    
+  categoryId?:string    
 }

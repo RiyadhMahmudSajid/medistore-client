@@ -1,4 +1,6 @@
 import { env } from "@/env";
+import { Medicine } from "@/types";
+
 
 
 const API_URL = env.NEXT_PUBLIC_API_URL
@@ -56,6 +58,31 @@ const medicineService = {
             return { data: data, error: null }
         } catch (err) {
             return { data: null, error: { err } }
+        }
+    },
+
+
+    postMedicine: async function (medicine: Medicine, cookieHeader?: string) {
+        console.log(cookieHeader);
+        try {
+           
+            const res = await fetch(`${API_URL}/medicine`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    // Cookie: cookieStore.toString()
+                    ...(cookieHeader && { Cookie: cookieHeader })
+                },
+                body: JSON.stringify(medicine)
+            })
+            const data = await res.json()
+            console.log("data is", data);
+            if (data.error) {
+                return { data: null, error: { message: "can not post " } }
+            }
+            return { data: data, error: null }
+        } catch (err) {
+            return { data: null, error: { message: "something went wrong" } }
         }
     }
 

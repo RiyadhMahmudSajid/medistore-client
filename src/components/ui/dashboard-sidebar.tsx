@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/sidebar"
 import Link from "next/link"
 import { adminRoutes } from "@/Route/adminRoutes"
+import { customerRoutes } from "@/Route/customerRoutes"
+import { sellerRoutes } from "@/Route/sellerRoutes"
 
 
 
@@ -25,6 +27,12 @@ export function DashboardSidebar({ user, ...props }: { user: { role: string } & 
         case "ADMIN":
             routes = adminRoutes
             break
+        case "CUSTOMER":
+            routes = customerRoutes
+            break 
+        case "SELLER":
+            routes = sellerRoutes
+            break       
         default:
             return <p>No Dashboard</p>;
 

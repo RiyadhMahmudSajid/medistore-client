@@ -10,9 +10,18 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 
 const MyCart = () => {
-  const { cart , removeFromCart } = useCart();
+  const { cart, removeFromCart } = useCart();
+  const router = useRouter()
+
+  const totalPrice = cart.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
+
 
   if (cart.length === 0) {
     return (
@@ -50,13 +59,25 @@ const MyCart = () => {
               Total: ${(item.price * item.quantity).toFixed(2)}
             </span>
             <Button
-            onClick={()=>removeFromCart(item.id)}
-            size="sm" variant="destructive">
+              onClick={() => removeFromCart(item.id)}
+              size="sm" variant="destructive">
               Remove
             </Button>
           </CardFooter>
         </Card>
       ))}
+      <Card className="p-4">
+        <div className="flex justify-between items-center mb-4">
+          <span className="text-lg font-semibold">Grand Total:</span>
+          <span className="text-lg font-bold">
+            ${totalPrice.toFixed(2)}
+          </span>
+        </div>
+
+        <Button onClick={() => router.push("/checkout")}className="w-full">
+          Proceed to Checkout
+        </Button>
+      </Card>
     </div>
   );
 };

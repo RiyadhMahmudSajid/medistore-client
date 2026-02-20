@@ -34,7 +34,7 @@ const formSchema = z.object({
     .min(5, "Bug title must be at least 5 characters.")
     .max(32, "Bug title must be at most 32 characters."),
   email: z.string()
-    .min(1, "Please select a role"),
+    .min(1, "Invalid email address"),
   password: z
     .string()
     .min(8, "Description must be at least 8 characters."),

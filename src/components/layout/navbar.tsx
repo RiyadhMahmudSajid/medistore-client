@@ -8,11 +8,13 @@ import Link from "next/link";
 
 import { Button } from "../ui/button";
 import CartCounterWrapper from "./HomeOther/CartCounterWrapper";
+import userService from "../modules/userService";
 
 
-const Navbar = () => {
+const Navbar = async () => {
 
-
+  const { data } = await userService.getSession()
+  console.log("NAv data is",data);
   return (
     <nav className="fixed inset-x-0 top-0 z-50 border-b bg-background/80 backdrop-blur-md shadow-sm">
 
@@ -20,12 +22,12 @@ const Navbar = () => {
 
 
         <div className="">
-          <Logo  />
+          <Logo />
         </div>
 
 
         <div className="hidden md:flex flex-1 justify-center px-8 ">
-          <NavMenu  />
+          <NavMenu />
         </div>
 
 
@@ -42,9 +44,12 @@ const Navbar = () => {
 
             {/* Text Section */}
             <div className="flex items-center justify-center gap-1 leading-none">
-          
+
               <span className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">
-               <Link href='/login'> Sign In</Link>
+                {
+                   data.user?  <Link href='/login'> {data.user.name}</Link> : <p>Sign Out</p>
+                }
+               
               </span>
               <ChevronDown></ChevronDown>
             </div>
@@ -62,7 +67,7 @@ const Navbar = () => {
 
       <div className="md:hidden px-4 pb-3 flex justify-center w-full">
         <div >
-          <NavMenu/>
+          <NavMenu />
         </div>
       </div>
     </nav>

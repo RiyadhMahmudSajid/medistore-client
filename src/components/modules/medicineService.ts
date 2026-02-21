@@ -70,7 +70,7 @@ const medicineService = {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    // Cookie: cookieStore.toString()
+                   
                     ...(cookieHeader && { Cookie: cookieHeader })
                 },
                 body: JSON.stringify(medicine)
@@ -86,6 +86,10 @@ const medicineService = {
         }
     }
 
+    
+
 };
+
+
 
 export default medicineService;

@@ -1,7 +1,10 @@
+import { CreateCategoryByAdmin } from "@/components/modules/dashboardComponent/adminDashboard/CreateCategory";
+
+
 const CreateCategory = () => {
     return (
         <div>
-            this is category
+           <CreateCategoryByAdmin></CreateCategoryByAdmin>
         </div>
     );
 };

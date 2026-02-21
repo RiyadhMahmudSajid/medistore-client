@@ -6,7 +6,7 @@ export const sellerRoutes: Route[] = [
         items: [
             {
                 title: "Create Medicine",
-                url: "sellerdashboard/CreateMedicine"
+                url: "/sellerdashboard/CreateMedicine"
             }
 
         ]

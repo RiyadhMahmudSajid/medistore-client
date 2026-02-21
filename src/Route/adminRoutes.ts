@@ -6,7 +6,7 @@ export const adminRoutes: Route[] = [
         items: [
             {
                 title: "Create Category",
-                url: "admindashboard/createCategory"
+                url: "/admindashboard/createCategory"
             }
 
         ]

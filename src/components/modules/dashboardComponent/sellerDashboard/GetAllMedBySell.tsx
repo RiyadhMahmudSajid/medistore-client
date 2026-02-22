@@ -1,4 +1,3 @@
-// components/modules/dashboardComponent/sellerDashboard/GetAllMedBySell.tsx
 
 import {
   Table,
@@ -11,7 +10,7 @@ import {
 } from "@/components/ui/table"
 import { Medicine } from "@/types"
 import { Button } from "@/components/ui/button"
-import { Edit, Trash2, Eye } from "lucide-react" // আইকন ব্যবহারের জন্য
+import { Edit, Trash2, Eye } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
 export function GetMyMedicine({ medicines }: { medicines: Medicine[] }) {
@@ -34,7 +33,7 @@ export function GetMyMedicine({ medicines }: { medicines: Medicine[] }) {
               <TableCell className="font-medium">
                 <div className="flex flex-col">
                    <span>{item.name}</span>
-                   <span className="text-[10px] text-muted-foreground uppercase tracking-tighter">ID: {item.id.slice(-6)}</span>
+                  
                 </div>
               </TableCell>
               <TableCell className="font-semibold text-primary">

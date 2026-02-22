@@ -1,66 +1,67 @@
+import Image from "next/image";
 import medicineService from "@/components/modules/medicineService";
-
 import { Medicine } from "@/types";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge"
-
+import { Badge } from "@/components/ui/badge";
 import {
-    Card,
-    CardAction,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Link from "next/link";
 
-
-
-
-
 const Getmedicine = async () => {
+  const { data } = await medicineService.getAllMedicine(
+    { search: "" },
+    { revalidate: 10 }
+  );
 
-    const { data } = await medicineService.getAllMedicine({
-        search:""
-    },{revalidate:10})
-    console.log(data);
-    return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
-            {
-                data?.AllMedicine?.slice(0, 6).map((medicine: Medicine) => (
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 p-8">
+      {data?.AllMedicine?.slice(0, 6).map((medicine: Medicine) => (
+        <Card
+          key={medicine.id}
+          className="group overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+        >
+         
+          <div className="relative h-52 w-full overflow-hidden">
+            <Image
+              src={medicine.image || "/placeholder.png"}
+              alt={medicine.name}
+              fill
+              className="object-cover group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
 
-                    <div key={medicine.id}>
-                        <Card className="relative mx-auto w-full max-w-sm pt-0">
-                            {/* <div className="absolute inset-0 z-30 aspect-video bg-black/35" /> */}
+          <CardHeader className="space-y-2">
+            <Badge className="w-fit">{medicine.manufacturer}</Badge>
 
-                            <CardHeader>
-                                <CardAction>
-                                    <Badge variant="secondary">{medicine.name}</Badge>
-                                </CardAction>
-                                <CardTitle>{medicine.manufacturer}</CardTitle>
-                                <CardDescription>
-                                    {medicine.description}
-                                </CardDescription>
-                                <div className="font-bold">{medicine.price}</div>
-                            </CardHeader>
-                            <CardFooter className="flex justify-between">
-                                <Link href={`/medicine/${medicine.id}`}>
+            <CardTitle className="text-lg font-semibold">
+              {medicine.name}
+            </CardTitle>
 
-                                <Button className="flex-1">View Event</Button>
-                                </Link>
-                                
-                            </CardFooter>
-                        </Card>
+            <CardDescription className="line-clamp-2 text-sm">
+              {medicine.description}
+            </CardDescription>
 
-                    </div>
-                ))
+            <div className="text-xl font-bold text-green-600">
+              ৳ {medicine.price}
+            </div>
+          </CardHeader>
 
-            }
-        </div>
-    );
-}
+          <CardFooter>
+            <Link href={`/medicine/${medicine.id}`} className="w-full">
+              <Button className="w-full rounded-xl">
+                View Details
+              </Button>
+            </Link>
+          </CardFooter>
+        </Card>
+      ))}
+    </div>
+  );
+};
 
 export default Getmedicine;
-
-
-{/* <MedicineCard key={medicine.id} medicine={medicine}></MedicineCard> */ }

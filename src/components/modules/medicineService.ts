@@ -3,6 +3,7 @@ import { Medicine } from "@/types";
 
 
 
+
 const API_URL = env.NEXT_PUBLIC_API_URL
 
 interface ServiceOption {
@@ -53,6 +54,7 @@ const medicineService = {
 
     getMedicineById: async function (MedicineId: string) {
         try {
+
             const res = await fetch(`${API_URL}/medicine/${MedicineId}`)
             const data = await res.json()
             return { data: data, error: null }
@@ -62,15 +64,34 @@ const medicineService = {
     },
 
 
+    getMedicineBySellerId: async function (cookieHeader?: string) {
+        try {
+            const res = await fetch(`${API_URL}/medicine/once`, {
+                headers: {
+                    "Content-Type": "application/json",
+                   
+                    ...(cookieHeader && { Cookie: cookieHeader }) 
+                },
+                next: { revalidate: 10 }
+            });
+            
+            const data = await res.json();
+            return { data: data, error: null };
+        } catch (err) {
+            return { data: null, error: { err } };
+        }
+    },
+
+
     postMedicine: async function (medicine: Medicine, cookieHeader?: string) {
         console.log(cookieHeader);
         try {
-           
+
             const res = await fetch(`${API_URL}/medicine`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                   
+
                     ...(cookieHeader && { Cookie: cookieHeader })
                 },
                 body: JSON.stringify(medicine)
@@ -78,6 +99,7 @@ const medicineService = {
             const data = await res.json()
             console.log("data is", data);
             if (data.error) {
+                console.log(data.error);
                 return { data: null, error: { message: "can not post " } }
             }
             return { data: data, error: null }
@@ -86,7 +108,7 @@ const medicineService = {
         }
     }
 
-    
+
 
 };
 

@@ -4,6 +4,7 @@ import userService from "@/components/modules/userService"
 import categoryService from "@/components/modules/categoryService"
 
 
+
 const CreateMedicine = async () => {
 
   const { data } = await userService.getSession()
@@ -17,6 +18,8 @@ console.log("id id",data.user.id);
   if (!data?.user) {
     redirect("/login")
   }
+
+
 
   return (
     <div>

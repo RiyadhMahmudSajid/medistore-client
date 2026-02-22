@@ -9,6 +9,8 @@ const layout = ({ children }: { children: React.ReactNode }) => {
        <main className="mt-16">
         {children}
       </main>
+   
+    
     </div>
    )
 }

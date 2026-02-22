@@ -19,36 +19,38 @@ const banners = [banner1, banner2, banner3]
 
 export function HomeCarouselSpacing() {
   return (
-    <Carousel
-      opts={{ align: "start", loop: true }}
-      plugins={[Autoplay({ delay: 2000 })]}
-      className="w-full max-w-full "
-    >
-      <CarouselContent>
-        {banners.map((banner, index) => (
-          <CarouselItem
-            key={index}
-            className="basis-full sm:basis-1/1 lg:basis-1/1"
-          >
-            <Card>
-              <CardContent className="px-10 py-5">
-                <div className="relative aspect-[16/6] w-full h-full">
-                  <Image
-                    src={banner}
-                    alt={`Banner ${index + 1}`}
-                    fill
-                    className="object-cover rounded-md"
-                    priority={index === 0}
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
+    <div className="space-y-6"> {/* ছবি এবং বাটনের মাঝে গ্যাপের জন্য */}
+      <Carousel
+        opts={{ align: "start", loop: true }}
+        plugins={[Autoplay({ delay: 3000 })]}
+        className="w-full"
+      >
+        <CarouselContent className="-ml-1">
+          {banners.map((banner, index) => (
+            <CarouselItem key={index} className="pl-1 basis-full">
+              <div className="relative aspect-[16/6] w-full overflow-hidden rounded-2xl border bg-muted">
+                <Image
+                  src={banner}
+                  alt={`Banner ${index + 1}`}
+                  fill
+                  className="object-cover"
+                  priority={index === 0}
+                />
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
 
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
+        <div className="flex items-center justify-center gap-4 mt-6">
+          <CarouselPrevious className="static translate-y-0 h-10 w-10 rounded-full border-2 border-primary/20 hover:border-primary hover:bg-primary/10 transition-all" />
+
+          <div className="h-1 w-12 bg-primary/20 rounded-full overflow-hidden">
+            <div className="h-full bg-primary w-1/3 animate-pulse"></div>
+          </div>
+
+          <CarouselNext className="static translate-y-0 h-10 w-10 rounded-full border-2 border-primary/20 hover:border-primary hover:bg-primary/10 transition-all" />
+        </div>
+      </Carousel>
+    </div>
   )
 }

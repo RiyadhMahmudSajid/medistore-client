@@ -1,6 +1,9 @@
+
 import CategoryMedicine from "@/components/layout/categorywithmedicine/CategoryMedicine";
 import categoryService from "@/components/modules/categoryService";
+
 import { Medicine } from "@/types";
+
 
 
 
@@ -14,9 +17,9 @@ export default async function MedicineDetailsPage({params,}: {params: Promise<{ 
     if (!category) return <p>Category not found!</p>;
 
 
-
     return (
-        <div>
+       <div className="max-w-7xl mx-auto ">
+         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
             {category.medicines?.length > 0 ? (
                 category.medicines.map((medicine: Medicine) => (
                     <CategoryMedicine
@@ -29,5 +32,6 @@ export default async function MedicineDetailsPage({params,}: {params: Promise<{ 
             )}
 
         </div>
+       </div>
     );
 }

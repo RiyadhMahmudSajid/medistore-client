@@ -10,17 +10,18 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
 const CategoryMedicine = ({ medicine }: { medicine: Medicine }) => {
     return (
-        <Card className="mx-auto w-full max-w-sm overflow-hidden">
+        <Card className="mx-auto mt-4 w-full max-w-sm overflow-hidden">
             {/* Image section */}
-            <div className="relative aspect-[4/3] w-full">
-                {/* <Image
-          src={medicine.image}
-          alt={medicine.name}
-          fill
-          className="object-cover"
-        /> */}
+            <div className="relative h-52 w-full overflow-hidden">
+                <Image
+                    src={medicine.image || "/placeholder.png"}
+                    alt={medicine.name}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
             </div>
 
             <CardHeader>
@@ -46,7 +47,11 @@ const CategoryMedicine = ({ medicine }: { medicine: Medicine }) => {
             </CardHeader>
 
             <CardFooter>
-                <Button className="w-full">Add to Cart</Button>
+                <Link href={`/medicine/${medicine.id}`} className="w-full">
+                    <Button className="w-full rounded-xl">
+                        View Details
+                    </Button>
+                </Link>
             </CardFooter>
         </Card>
     );

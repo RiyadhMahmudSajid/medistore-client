@@ -10,7 +10,7 @@ export default  function Home() {
 
     
       <HeroPage></HeroPage>
-   
+  
 
   );
 }

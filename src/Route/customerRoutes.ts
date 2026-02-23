@@ -6,7 +6,7 @@ export const customerRoutes: Route[] = [
         items: [
             {
                 title: "My Order",
-                url: "customerdashboard/ownOrder"
+                url: "/customerdashboard/ownOrder"
             }
 
         ]

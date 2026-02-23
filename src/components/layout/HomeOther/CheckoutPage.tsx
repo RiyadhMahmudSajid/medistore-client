@@ -9,11 +9,14 @@ import { env } from "@/env";
 
 type Props = {
     user: string
+   
 }
 
 const API_URL = env.NEXT_PUBLIC_API_URL
 
 const CheckoutPage = ({ user }: Props) => {
+    console.log(user);
+   
     const { cart } = useCart();
 
     const form = useForm({
@@ -55,17 +58,20 @@ const CheckoutPage = ({ user }: Props) => {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
+                       
                     },
                     credentials: "include",
                     body: JSON.stringify({
-
+                        customerId: user,
+                        addressId: addressData.id,
+                        totalPrice: cart.reduce((acc: number, item: any) => acc + (item.price * item.quantity), 0),
+                      
                         items: cart.map((item: any) => ({
                             medicineId: item.id,
                             quantity: item.quantity,
                             price: item.price
                         })),
-                        addressId: addressData.id,
-                        totalPrice: cart.reduce((acc: number, item: any) => acc + (item.price * item.quantity), 0)
+
                     }),
                 })
 
@@ -75,7 +81,6 @@ const CheckoutPage = ({ user }: Props) => {
                     throw new Error("Order creation failed");
                 }
 
-                // ৩️⃣ Payment URL পেয়ে redirect
                 if (orderData.paymentUrl) {
                     toast.success("Redirecting to payment...", { id: toastId });
                     window.location.href = orderData.paymentUrl;

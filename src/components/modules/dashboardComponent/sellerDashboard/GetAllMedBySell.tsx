@@ -1,4 +1,4 @@
-
+"use client"
 import {
   Table,
   TableBody,
@@ -12,8 +12,26 @@ import { Medicine } from "@/types"
 import { Button } from "@/components/ui/button"
 import { Edit, Trash2, Eye } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { deleteMedicineBySeller } from "@/action/medicineBySeller"
+
 
 export function GetMyMedicine({ medicines }: { medicines: Medicine[] }) {
+
+  const handleDelete = async (id: string) => {
+    console.log("delete id si", id);
+
+    const confirmDelete = confirm("Are you sure you want to delete this medicine?");
+
+    if (confirmDelete) {
+      try {
+        const result = await deleteMedicineBySeller(id);
+        console.log("delet resa is ", result);
+
+      } catch (error) {
+        console.error("Delete failed", error);
+      }
+    }
+  }
   return (
     <div className="rounded-xl border bg-card shadow-sm overflow-hidden">
       <Table>
@@ -32,8 +50,8 @@ export function GetMyMedicine({ medicines }: { medicines: Medicine[] }) {
             <TableRow key={item.id} className="hover:bg-muted/30 transition-colors">
               <TableCell className="font-medium">
                 <div className="flex flex-col">
-                   <span>{item.name}</span>
-                  
+                  <span>{item.name}</span>
+
                 </div>
               </TableCell>
               <TableCell className="font-semibold text-primary">
@@ -59,15 +77,19 @@ export function GetMyMedicine({ medicines }: { medicines: Medicine[] }) {
                   <Button variant="outline" size="icon" className="h-8 w-8">
                     <Eye className="h-4 w-4 text-blue-500" />
                   </Button>
-                  
+
                   {/* Update Button */}
-                  <Button variant="outline" size="icon" className="h-8 w-8 border-amber-200 bg-amber-50 hover:bg-amber-100">
-                    <Edit className="h-4 w-4 text-amber-600" />
+                  <Button variant="outline"
+
+                    onClick={() => handleDelete(item.id!)}
+                    size="icon" className="h-8 w-8 border-amber-200 bg-amber-50 hover:bg-amber-100">
+                     <Trash2 className="h-4 w-4 text-red-600" />
                   </Button>
 
                   {/* Delete Button */}
                   <Button variant="outline" size="icon" className="h-8 w-8 border-red-200 bg-red-50 hover:bg-red-100">
-                    <Trash2 className="h-4 w-4 text-red-600" />
+                   
+                    <Edit className="h-4 w-4 text-amber-600" />
                   </Button>
                 </div>
               </TableCell>

@@ -69,12 +69,14 @@ const medicineService = {
             const res = await fetch(`${API_URL}/medicine/once`, {
                 headers: {
                     "Content-Type": "application/json",
-                   
-                    ...(cookieHeader && { Cookie: cookieHeader }) 
+
+                    ...(cookieHeader && { Cookie: cookieHeader })
                 },
-                next: { revalidate: 10 }
+                next: {
+                    tags: ['myMedicine'],
+                },
             });
-            
+
             const data = await res.json();
             return { data: data, error: null };
         } catch (err) {
@@ -103,6 +105,24 @@ const medicineService = {
                 return { data: null, error: { message: "can not post " } }
             }
             return { data: data, error: null }
+        } catch (err) {
+            return { data: null, error: { message: "something went wrong" } }
+        }
+    },
+
+    deleteMedicineBySeller: async function (MedicineId: string, cookieHeader?: string) {
+        try {
+
+            const res = await fetch(`${API_URL}/medicine/${MedicineId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...(cookieHeader && { Cookie: cookieHeader })
+                }
+            })
+            const data = await res.json();
+            return { data: data, error: null };
+
         } catch (err) {
             return { data: null, error: { message: "something went wrong" } }
         }

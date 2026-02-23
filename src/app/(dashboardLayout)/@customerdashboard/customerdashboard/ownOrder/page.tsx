@@ -1,7 +1,16 @@
-const ownOrder = () => {
+import GetMyOrder from "@/components/modules/dashboardComponent/customerDashboard/GetMyOrder";
+import orderService from "@/components/modules/orderService";
+import { cookies } from "next/headers";
+
+
+const ownOrder = async () => {
+    const cookieStore = await cookies();
+    const cookieHeader = cookieStore.toString();
+    const {data} = await orderService.getMyOrder(cookieHeader)
+    console.log("myorder is",data);
     return (
         <div>
-            My Order
+           <GetMyOrder orders= {data}></GetMyOrder>
         </div>
     );
 };

@@ -7,6 +7,10 @@ export const customerRoutes: Route[] = [
             {
                 title: "My Order",
                 url: "/customerdashboard/ownOrder"
+            },
+            {
+                title:"CreateReview",
+                url:"/customerdashboard/myreview"
             }
 
         ]

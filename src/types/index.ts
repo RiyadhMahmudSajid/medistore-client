@@ -11,3 +11,7 @@ export type * from "./OrderStatus"
 export type * from "./Order"
 
 export type * from "./MyOrdersResponse"
+
+export type * from "./sellerOrder"
+
+export type * from "./review"

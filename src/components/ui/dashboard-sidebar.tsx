@@ -1,5 +1,5 @@
 import * as React from "react"
-
+import Link from "next/link"
 import {
     Sidebar,
     SidebarContent,
@@ -12,48 +12,54 @@ import {
     SidebarMenuItem,
     SidebarRail,
 } from "@/components/ui/sidebar"
-import Link from "next/link"
+import { LayoutDashboard } from "lucide-react"
 import { adminRoutes } from "@/Route/adminRoutes"
 import { customerRoutes } from "@/Route/customerRoutes"
 import { sellerRoutes } from "@/Route/sellerRoutes"
 
-
-
-export function DashboardSidebar({ user, ...props }: { user: { role: string } & React.ComponentProps<typeof Sidebar> }) {
-
+export function DashboardSidebar({ user, ...props }: { user: { role: string } } & React.ComponentProps<typeof Sidebar>) {
+    
 
     let routes: any = []
-    switch (user.role) {
-        case "ADMIN":
-            routes = adminRoutes
-            break
-        case "CUSTOMER":
-            routes = customerRoutes
-            break 
-        case "SELLER":
-            routes = sellerRoutes
-            break       
-        default:
-            return <p>No Dashboard</p>;
+    if (user.role === "ADMIN") routes = adminRoutes
+    else if (user.role === "CUSTOMER") routes = customerRoutes
+    else if (user.role === "SELLER") routes = sellerRoutes
+    else return null
 
-
-    }
     return (
-        <Sidebar {...props}>
-            <SidebarHeader>
-                DashBoard
+        <Sidebar className="border-r border-sidebar-border bg-sidebar" {...props}>
+           
+            <SidebarHeader className="h-16 flex items-center px-6 border-b border-sidebar-border/50">
+                <div className="flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center text-primary-foreground shadow-sm">
+                        <LayoutDashboard className="h-4 w-4" />
+                    </div>
+                    <span className="font-bold text-lg text-sidebar-foreground">
+                        Medi<span className="text-primary">Hub</span>
+                    </span>
+                </div>
             </SidebarHeader>
-            <SidebarContent>
-                {/* We create a SidebarGroup for each parent. */}
-                {routes.map((item: any) => (
-                    <SidebarGroup key={item.title}>
-                        <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+
+            <SidebarContent className="p-3">
+                {routes.map((group: any) => (
+                    <SidebarGroup key={group.title} className="py-2">
+                      
+                        <SidebarGroupLabel className="px-3 text-[10px] uppercase font-bold text-muted-foreground mb-1">
+                            {group.title}
+                        </SidebarGroupLabel>
+                        
                         <SidebarGroupContent>
-                            <SidebarMenu>
-                                {item.items.map((item: any) => (
+                            <SidebarMenu className="gap-0.5">
+                                {group.items.map((item: any) => (
                                     <SidebarMenuItem key={item.title}>
-                                        <SidebarMenuButton asChild >
-                                            <Link href={item.url}>{item.title}</Link>
+                                        <SidebarMenuButton 
+                                            asChild 
+                                            className="h-9 px-3 rounded-lg text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-primary transition-colors font-medium"
+                                        >
+                                            <Link href={item.url}>
+                                                <div className="h-1.5 w-1.5 rounded-full bg-primary/40 mr-1" />
+                                                {item.title}
+                                            </Link>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>
                                 ))}
@@ -62,6 +68,7 @@ export function DashboardSidebar({ user, ...props }: { user: { role: string } & 
                     </SidebarGroup>
                 ))}
             </SidebarContent>
+
             <SidebarRail />
         </Sidebar>
     )

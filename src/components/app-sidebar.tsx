@@ -34,7 +34,8 @@ export function AppSidebar({ categories }: AppSidebarProps) {
   return (
     <Sidebar side="left"
       variant="sidebar" 
-      className="top-16 h-[calc(100vh-4rem)] border-r border-border/50 bg-background z-40">
+      
+      className="top-16  border-r border-border/50 bg-background z-30">
       <SidebarHeader className="p-4">
         <div className="mb-4 px-2">
           <h2 className="text-lg font-bold tracking-tight text-primary">Medicine Categories</h2>

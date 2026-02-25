@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic"
 import { methods } from "better-auth/react"
 import { redirect } from "next/navigation"
 

@@ -19,7 +19,7 @@ const banners = [banner1, banner2, banner3]
 
 export function HomeCarouselSpacing() {
   return (
-    <div className="space-y-6"> {/* ছবি এবং বাটনের মাঝে গ্যাপের জন্য */}
+    <div className="space-y-6"> 
       <Carousel
         opts={{ align: "start", loop: true }}
         plugins={[Autoplay({ delay: 3000 })]}

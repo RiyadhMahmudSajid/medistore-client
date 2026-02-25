@@ -10,15 +10,15 @@ export default function LogoutButton() {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          router.refresh(); 
           router.push("/login");
+          router.refresh(); 
         },
       },
     });
   };
 
   return (
-    <button onClick={handleLogout} className="cursor-pointer">
+    <button onClick={handleLogout} className="cursor-pointer font-semibold">
       Sign Out
     </button>
   );

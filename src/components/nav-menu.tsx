@@ -12,9 +12,7 @@ import { Search } from "lucide-react"
 import medicineService from "@/components/modules/medicineService"
 import { Medicine } from "@/types"
 
-// interface medicineData {
-//   medicine:Medicine[]
-// }
+
 
 export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => {
   const [search, setSearch] = useState("")
@@ -83,7 +81,7 @@ export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => {
             <Link
               key={medicine.id}
               href={`/medicine/${medicine.id}`}
-              className="block px-4 py-2 text-sm hover:bg-secondary transition"
+              className="block px-4 py-2 text-sm hover:bg-secondary transition "
             >
               {medicine.name} — ৳{medicine.price}
             </Link>

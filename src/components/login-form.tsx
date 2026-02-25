@@ -27,6 +27,7 @@ import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "./u
 import * as z from "zod"
 import { authClient } from "@/lib/auth-client"
 import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
 
@@ -40,6 +41,7 @@ const formSchema = z.object({
 
 
 export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
+  const router = useRouter();
   const handleGoogleLogin = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
@@ -70,6 +72,8 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
           toast.error(error.message, { id: tostId })
         }
         toast.success("LogIn Successfully", { id: tostId })
+         router.push("/") 
+        router.refresh() 
       } catch (err) {
         toast.error("Some thing went wrong", { id: tostId })
 

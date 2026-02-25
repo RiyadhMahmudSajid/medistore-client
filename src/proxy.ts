@@ -1,36 +1,49 @@
 import { NextRequest, NextResponse } from "next/server";
-
 import { Roles } from "./constants/roles";
 import userService from "./components/modules/userService";
 
-export const proxy = async(request: NextRequest) => {
-    console.log("Hello Prox",request.url);
+export const middleware = async (request: NextRequest) => {
     const path = request.nextUrl.pathname;
-    console.log(path);
-    let isAuthenticated = false;
-    let isAdmin = false;
-    const {data} = await userService.getSession()
-    console.log(data);
-    if(data){
-      isAuthenticated =  true;
-      isAdmin = data.user.role === Roles.admin;
+    const { data } = await userService.getSession();
+
+    const user = data?.user;
+    const isAuthenticated = !!user;
+
+    if (!isAuthenticated) {
+        return NextResponse.redirect(new URL("/login", request.url));
     }
 
-    if(!isAuthenticated){
-      return NextResponse.redirect(new URL("/login",request.url))
-    }
-    if(isAdmin && path.startsWith("/dashboard")){
-      return NextResponse.redirect(new URL("/admin-dashboard",request.url))
-    }
-    if(!isAdmin && path.startsWith("/admin-dashboard")){
-      return NextResponse.redirect(new URL("/dashboard",request.url))
+    const role = user.role;
+
+    if (role === Roles.admin) {
+       
+        if (path.startsWith("/customerdashboard") || path.startsWith("/sellerdashboard")) {
+            return NextResponse.redirect(new URL("/admindashboard", request.url));
+        }
     }
 
-    return NextResponse.next()
+
+    else if (role === Roles.seller) {
+        if (!path.startsWith("/sellerdashboard")) {
+            return NextResponse.redirect(new URL("/sellerdashboard", request.url));
+        }
+    }
+
+    else if (role === Roles.customer) {
+        if (!path.startsWith("/customerdashboard")) {
+            return NextResponse.redirect(new URL("/customerdashboard", request.url));
+        }
+    }
+
+    return NextResponse.next();
 };
 
 export const config = {
-  matcher: ["/dashboard","/dashboard/:path*","/admin-dashboard","/admin-dashboard/:path*"],
-}
+  matcher: [
+    "/admindashboard/:path*",
+    "/sellerdashboard/:path*",
+    "/customerdashboard/:path*",
+  ],
+};
 
-export default proxy;
+export default middleware;

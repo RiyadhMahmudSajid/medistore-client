@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic"
 import { CreateCategoryByAdmin } from "@/components/modules/dashboardComponent/adminDashboard/CreateCategory";
 
 

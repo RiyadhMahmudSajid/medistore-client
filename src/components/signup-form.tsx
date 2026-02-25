@@ -27,6 +27,8 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field"
 import * as z from "zod"
 import { authClient } from "@/lib/auth-client"
 import { toast } from "sonner"
+import { useRouter } from "next/navigation"
+
 
 const formSchema = z.object({
   name: z
@@ -47,7 +49,7 @@ const formSchema = z.object({
 
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
-
+const router = useRouter()
   const form = useForm({
     defaultValues: {
       name: "",
@@ -73,6 +75,9 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
           toast.error(error.message, { id: tostId })
         }
          toast.success("User created Successfully", { id: tostId })
+         setTimeout(() => {
+          router.push("/login") 
+        }, 2000)
       } catch (err) {
          toast.error("Some thing went wrong", { id: tostId })
 

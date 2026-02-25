@@ -1,6 +1,6 @@
+export const dynamic = "force-dynamic"
 import CheckoutPage from "@/components/layout/HomeOther/CheckoutPage";
 import userService from "@/components/modules/userService";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export default async function Page() {

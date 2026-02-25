@@ -11,6 +11,10 @@ export const customerRoutes: Route[] = [
             {
                 title:"CreateReview",
                 url:"/customerdashboard/myreview"
+            },
+             {
+                title:"Home",
+                url:"/"
             }
 
         ]

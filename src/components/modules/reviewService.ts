@@ -46,5 +46,23 @@ export const reviewService = {
         }
     },
 
+    getSellerReview : async function (cookieHeader:string) {
+        try {
+            const res = await fetch(`${API_URL}/review/sellerReview`, {
+                headers: {
+                    "Content-Type": "application/json",
+
+                    ...(cookieHeader && { Cookie: cookieHeader })
+                }
+              
+            });
+            const data = await res.json();
+            return { data: data, error: null };
+        } catch (err) {
+            console.log(err);
+            return { data: null, error: { err } };
+        }
+    }
+
   
 }

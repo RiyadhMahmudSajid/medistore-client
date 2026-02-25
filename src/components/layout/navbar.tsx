@@ -27,13 +27,12 @@ const Navbar = async () => {
       : '/customerdashboard';
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 border-b bg-background/80 backdrop-blur-md shadow-sm">
+    <nav className="fixed inset-x-0 top-0 z-40 border-b bg-background/80 backdrop-blur-md shadow-sm ">
       <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4">
+        
         <Logo />
 
-        <div className="hidden md:flex flex-1 justify-center px-4">
-          <NavMenu />
-        </div>
+   
 
         <div className="flex items-center gap-2 sm:gap-4">
           <CartCounterWrapper />
@@ -70,7 +69,7 @@ const Navbar = async () => {
                   <Link href={dashboardLink}>Dashboard</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <div className="w-full">
+                <div className="w-full ml-[0.5rem]">
                   <LogoutButton />
                 </div>
               </DropdownMenuContent>

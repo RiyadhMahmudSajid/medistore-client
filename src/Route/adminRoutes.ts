@@ -7,6 +7,14 @@ export const adminRoutes: Route[] = [
             {
                 title: "Create Category",
                 url: "/admindashboard/createCategory"
+            },
+            {
+                title:"All Medicine Review",
+                url:"/admindashboard/getAllreview"
+            },
+            {
+                title:"Home",
+                url:"/"
             }
 
         ]

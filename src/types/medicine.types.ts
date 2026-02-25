@@ -1,3 +1,5 @@
+import { Review } from "./review";
+
 export interface Medicine {
   id?: string;             
   name: string;            
@@ -8,4 +10,5 @@ export interface Medicine {
   stock: number;           
   sellerId?: string;    
   categoryId?:string    
+  reviews?:Review
 }

@@ -1,4 +1,4 @@
-
+export const dynamic = "force-dynamic";
 import medicineService from "@/components/modules/medicineService";
 import { Button } from "@/components/ui/button";
 import MedicineDetailsClient from "./MedicineDetailsClient";

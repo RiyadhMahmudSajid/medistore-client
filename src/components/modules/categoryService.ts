@@ -31,7 +31,7 @@ const categoryService = {
             if (option?.revalidate) {
                 config.next = { revalidate: option.revalidate }
             }
-            console.log(url.toString());
+          
 
             const result = await fetch(url.toString(), config)
             const data = await result.json()

@@ -1,11 +1,9 @@
+export const dynamic = "force-dynamic";
+import { redirect } from "next/navigation";
 
 
 const CustomerPage = () => {
-    return (
-        <div>
-            THhis is customer
-        </div>
-    );
+    return redirect('/customerdashboard/ownOrder')
 };
 
 export default CustomerPage;

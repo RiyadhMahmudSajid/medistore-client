@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { GetMyMedicine } from '@/components/modules/dashboardComponent/sellerDashboard/GetAllMedBySell';
 import medicineService from '@/components/modules/medicineService';
 

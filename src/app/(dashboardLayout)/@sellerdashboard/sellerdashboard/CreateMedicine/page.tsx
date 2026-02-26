@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { redirect } from "next/navigation"
 import { CreateMedicineForm } from "@/components/modules/dashboardComponent/sellerDashboard/CreateMedicine"
 import userService from "@/components/modules/userService"

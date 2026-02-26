@@ -30,7 +30,7 @@ export default async function HeroPage() {
 
   const { data: categories } = await categoryService.getCategory(
     { search: "" },
-    { revalidate: 10 }
+    { revalidate: 3600 }
 
   )
 

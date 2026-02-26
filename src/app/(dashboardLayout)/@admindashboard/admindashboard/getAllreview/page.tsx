@@ -1,6 +1,6 @@
 import { getReview } from "@/action/reviewAction";
 import AllReview from "@/components/modules/dashboardComponent/adminDashboard/AllReview";
-
+export const dynamic = "force-dynamic";
 const GeaAllReview = async() => {
     const {data:Review} = await getReview()
    

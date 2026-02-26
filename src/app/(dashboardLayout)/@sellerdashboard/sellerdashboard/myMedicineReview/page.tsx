@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getSellerReview } from "@/action/reviewAction";
 import MyMedReview from "@/components/modules/dashboardComponent/sellerDashboard/MyMedReview";
 

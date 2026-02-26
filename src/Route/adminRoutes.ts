@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { Route } from "@/types";
 
 export const adminRoutes: Route[] = [

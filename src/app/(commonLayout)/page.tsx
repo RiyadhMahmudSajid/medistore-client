@@ -1,3 +1,4 @@
+// export const dynamic = "force-dynamic";
 import HeroPage from "@/components/layout/Hero";
 
 

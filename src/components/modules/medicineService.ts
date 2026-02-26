@@ -13,6 +13,7 @@ interface ServiceOption {
 
 interface GetmedicineParams {
     search?: string
+    page?:string
 }
 const medicineService = {
     getAllMedicine: async function (params?: GetmedicineParams, option?: ServiceOption) {

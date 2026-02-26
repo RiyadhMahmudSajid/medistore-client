@@ -1,11 +1,9 @@
-import React from 'react';
+export const dynamic = "force-dynamic";
+import { redirect } from 'next/navigation';
+
 
 const SellerPage = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+    return redirect('/sellerdashboard/CreateMedicine')
 };
 
 export default SellerPage;

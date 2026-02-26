@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getSellerOrder } from "@/action/medicineBySeller";
 import SeeAllOrder from "@/components/modules/dashboardComponent/sellerDashboard/SeeAllOrder";
 

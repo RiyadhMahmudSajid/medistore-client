@@ -1,7 +1,7 @@
 import GetMyOrder from "@/components/modules/dashboardComponent/customerDashboard/GetMyOrder";
 import orderService from "@/components/modules/orderService";
 import { cookies } from "next/headers";
-
+export const dynamic = "force-dynamic";
 
 const ownOrder = async () => {
     const cookieStore = await cookies();

@@ -1,8 +1,9 @@
-import { createAuthClient } from "better-auth/react"
+import { createAuthClient } from "better-auth/react";
+
 export const authClient = createAuthClient({
-    
-    baseURL: "https://medistore-server-o4zl.onrender.com",
-    fetchOptions: {
-    credentials: "include"  
-  }
-})
+  baseURL: typeof window !== "undefined" ? window.location.origin : "",
+  basePath: "/api/auth",
+  fetchOptions: {
+    credentials: "include",
+  },
+});

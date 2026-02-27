@@ -11,6 +11,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/auth/:path*',
+        destination: 'https://medistore-server-o4zl.onrender.com/api/auth/:path*', 
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -40,7 +40,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
 
 
     const addToCart = (product: Omit<CartItem, "quantity">) => {
-        console.log(product);
+       
         setCart(prev => {
             const exist = prev.find(p => p.id === product.id);
 
@@ -82,7 +82,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
         setCart(prev => prev.filter(item => item.id !== selectedItem.id));
     };
 
-    console.log(cart);
+    
 
     return (
         <CartContext.Provider value={{ cart, setCart, addToCart, increaseQty, decreaseQty, removeFromCart, removeAllFromCart }}>

@@ -22,12 +22,12 @@ export default function PaginationControls({ meta }: PaginationControlsProps) {
   const { limit: pageSize, page: currentPage, total, totalPages } = meta;
 
   const searchParams = useSearchParams();
-  console.log("this is searchparams",searchParams);
+ 
   const router = useRouter();
 
   const navigateToPage = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
-    console.log("thhis is f p",params);
+    
     params.set("page", page.toString());
   
     router.push(`?${params.toString()}`);

@@ -65,7 +65,9 @@ export default async function HeroPage() {
           <div className="max-w-7xl mx-auto">
             <HomeCarouselSpacing />
             <Suspense fallback={<p className="text-center p-20 animate-pulse text-primary font-bold">Loading Medicines...</p>}>
-              <Getmedicine />
+              <div className="flex justify-center items-center">
+                <Getmedicine />
+              </div>
             </Suspense>
             <HealthGuideSection />
             <ServiceHighlights />

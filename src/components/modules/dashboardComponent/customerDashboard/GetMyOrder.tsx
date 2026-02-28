@@ -15,7 +15,7 @@ type Props = {
 };
 
 const GetMyOrder = ({ orders }: Props) => {
-    console.log("this is ", orders);
+    
   return (
     <div className="rounded-md border p-4">
       <Table>

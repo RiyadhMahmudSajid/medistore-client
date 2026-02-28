@@ -61,7 +61,7 @@ const router = useRouter()
       onSubmit: formSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log(value);
+     
       const tostId = toast.loading("Creating User")
       try {
         const userData = {

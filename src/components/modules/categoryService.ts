@@ -53,7 +53,7 @@ const categoryService = {
         }
     },
 postCategory: async function (category: Category, cookieHeader?: string) {
-        console.log(cookieHeader);
+       
         try {
 
             const res = await fetch(`${API_URL}/categoryPost`, {
@@ -66,7 +66,7 @@ postCategory: async function (category: Category, cookieHeader?: string) {
                 body: JSON.stringify(category)
             })
             const data = await res.json()
-            console.log("data is", data);
+            
             if (data.error) {
                 return { data: null, error: { message: "can not post " } }
             }

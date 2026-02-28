@@ -47,7 +47,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       provider: "google",
       callbackURL: "https://medistore-client-beta.vercel.app"
     })
-    console.log(data);
+    
   }
 
   const form = useForm({
@@ -61,13 +61,12 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       onSubmit: formSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log(value);
+      
       const tostId = toast.loading("LogIn User")
       try {
        
         const { data, error } = await authClient.signIn.email(value)
-        console.log(data);
-        console.log(error);
+        
         if (error) {
           toast.error(error.message, { id: tostId })
         }

@@ -22,7 +22,7 @@ const Allmedicine = async ({
 }) => {
 
     const {page} = await searchParams;
-    console.log(page);
+    
 
     const { data } = await medicineService.getAllMedicine(
         { search: "",page },

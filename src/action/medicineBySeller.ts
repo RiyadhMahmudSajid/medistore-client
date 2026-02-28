@@ -29,7 +29,7 @@ export const getSellerOrder = async () => {
         return res
 
     } catch (error) {
-        console.log(error);
+        
         return { data: null, error: { message: "Internal Server Error" } };
     }
 }
@@ -43,7 +43,7 @@ export const updateStatus = async (orderId:string,status:string) => {
         return res
 
     } catch (error) {
-        console.log(error);
+        
         return { data: null, error: { message: "Internal Server Error" } };
     }
 }

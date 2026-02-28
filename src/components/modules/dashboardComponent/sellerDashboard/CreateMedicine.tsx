@@ -47,7 +47,7 @@ const formSchema = z.object({
 const API_IMG = process.env.NEXT_PUBLIC_API_IMG
 
 export function CreateMedicineForm({ sellerId, categories, ...props }: React.ComponentProps<typeof Card> & { sellerId: string, categories: Category[] }) {
-  console.log("cate is kjkj", categories);
+  
 
    
   const handleImageUpload = async (file: File) => {
@@ -82,9 +82,9 @@ export function CreateMedicineForm({ sellerId, categories, ...props }: React.Com
     onSubmit: async ({ value }) => {
       const toastId = toast.loading("Creating medicine...")
       try {
-        console.log(value)
+       
         const res = await createMedicinePost(value)
-        console.log("medicine is", res);
+       
         toast.success("Medicine created successfully", { id: toastId })
 
       } catch (error) {

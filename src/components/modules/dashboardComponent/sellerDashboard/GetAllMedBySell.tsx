@@ -18,17 +18,17 @@ import { deleteMedicineBySeller } from "@/action/medicineBySeller"
 export function GetMyMedicine({ medicines }: { medicines: Medicine[] }) {
 
   const handleDelete = async (id: string) => {
-    console.log("delete id si", id);
+   
 
     const confirmDelete = confirm("Are you sure you want to delete this medicine?");
 
     if (confirmDelete) {
       try {
         const result = await deleteMedicineBySeller(id);
-        console.log("delet resa is ", result);
+        
 
       } catch (error) {
-        console.error("Delete failed", error);
+        
       }
     }
   }

@@ -38,7 +38,7 @@ export function CreateCategoryByAdmin({ ...props }: React.ComponentProps<typeof 
     onSubmit: async ({ value }) => {
       const toastId = toast.loading("Creating category...") 
       try {
-        console.log("Submitting Value:", value) 
+        
         
         const res = await createCategoryPost(value)
         

@@ -37,7 +37,7 @@ const orderService = {
             const data = await res.json();
             return { data: data, error: null };
         } catch (err) {
-            console.log(err);
+           
             return { data: null, error: { err } };
         }
     },

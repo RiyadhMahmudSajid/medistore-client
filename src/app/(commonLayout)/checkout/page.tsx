@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 export default async function Page() {
   const {data} = await userService.getSession()
-  console.log(data);
+  
 
 
   if (!data.session) {

@@ -7,7 +7,7 @@ const ownOrder = async () => {
     const cookieStore = await cookies();
     const cookieHeader = cookieStore.toString();
     const {data} = await orderService.getMyOrder(cookieHeader)
-    console.log("myorder is",data);
+    
     return (
         <div>
            <GetMyOrder orders= {data}></GetMyOrder>

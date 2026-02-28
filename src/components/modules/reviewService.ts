@@ -16,9 +16,9 @@ export const reviewService = {
                 body: JSON.stringify(review)
             })
             const data = await res.json()
-            console.log("data is", data);
+            
             if (data.error) {
-                console.log(data.error);
+                
                 return { data: null, error: { message: "can not post " } }
             }
             return { data: data, error: null }
@@ -41,7 +41,7 @@ export const reviewService = {
             const data = await res.json();
             return { data: data, error: null };
         } catch (err) {
-            console.log(err);
+            
             return { data: null, error: { err } };
         }
     },
@@ -59,7 +59,7 @@ export const reviewService = {
             const data = await res.json();
             return { data: data, error: null };
         } catch (err) {
-            console.log(err);
+            
             return { data: null, error: { err } };
         }
     }

@@ -13,9 +13,6 @@ const CreateMedicine = async () => {
     search:""
   },{revalidate:10})
 
-  console.log("Nala",categories);
-
-console.log("id id",data.user.id);
   if (!data?.user) {
     redirect("/login")
   }

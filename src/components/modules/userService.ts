@@ -27,7 +27,7 @@ const userService = {
             return { data: session, error: null };
 
         } catch (err) {
-            console.error("Session fetch error:", err);
+            
             return { data: null, error: { message: "Something Went Wrong" } };
         }
     }

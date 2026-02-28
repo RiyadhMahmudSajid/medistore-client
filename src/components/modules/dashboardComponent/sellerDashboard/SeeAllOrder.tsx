@@ -23,7 +23,7 @@ import { updateStatus } from '@/action/medicineBySeller';
 const SeeAllOrder = ({ orders }: { orders: SellerOrder[] }) => {
   
   const handleStatusChange = async(orderId: string, newStatus: string) => {
-    console.log(`Updating order ${orderId} to ${newStatus}`);
+    
 
     const result = await updateStatus(orderId,newStatus)
     

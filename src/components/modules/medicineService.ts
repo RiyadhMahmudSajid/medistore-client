@@ -48,7 +48,7 @@ const medicineService = {
             return { data: data, error: null };
 
         } catch (err) {
-            console.error("Medicine fetch error:", err);
+            
             return { data: null, error: { message: "Something Went Wrong" } };
         }
     },
@@ -87,7 +87,7 @@ const medicineService = {
 
 
     postMedicine: async function (medicine: Medicine, cookieHeader?: string) {
-        console.log(cookieHeader);
+       
         try {
 
             const res = await fetch(`${API_URL}/medicine`, {
@@ -100,9 +100,9 @@ const medicineService = {
                 body: JSON.stringify(medicine)
             })
             const data = await res.json()
-            console.log("data is", data);
+           
             if (data.error) {
-                console.log(data.error);
+               
                 return { data: null, error: { message: "can not post " } }
             }
             return { data: data, error: null }

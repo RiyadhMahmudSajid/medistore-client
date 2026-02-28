@@ -66,9 +66,13 @@ const Getmedicine = async () => {
         ))}
 
       </div>
-      <Link href={'/AllMedicine'} className="w-full">
-        <Button className="flex items-center justify-center">Explore All</Button>
-      </Link>
+      <div className="flex justify-center mt-6 mb-12">
+        <Link href="/AllMedicine">
+          <Button className="rounded-full px-10 py-6 text-md font-medium shadow-sm hover:shadow-md transition-all">
+            Explore All Medicines
+          </Button>
+        </Link>
+      </div>
 
     </div>
   );

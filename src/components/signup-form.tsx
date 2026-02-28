@@ -201,7 +201,7 @@ const router = useRouter()
 
         </form>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex justify-between">
 
         <Button type="button" variant="outline" onClick={() => form.reset()}>
           Reset

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: "MedPlus",
   description: "Buy Medicine Online",
   icons: {
-    icon: "/public/medihub-logo.png",
+    icon: "/document.png",
   },
 };
 

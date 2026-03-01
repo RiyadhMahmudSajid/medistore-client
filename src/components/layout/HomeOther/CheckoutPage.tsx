@@ -31,7 +31,7 @@ const CheckoutPage = ({ user }: Props) => {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     credentials: "include",
-                    body: JSON.stringify({ ...value, userId: user }),
+                    body: JSON.stringify(value),
                 });
 
                 const addressData = await addressRes.json();

@@ -60,10 +60,10 @@ const Footer = () => {
                         <h4 className="text-white font-semibold text-lg mb-6">Quick Links</h4>
                         <ul className="space-y-4">
                             {[
-                                { name: "All Medicines", href: "/all-medicines" },
-                                { name: "Upload Prescription", href: "/prescriptions" },
-                                { name: "Health Tips", href: "/health-tips" },
-                                { name: "Contact Us", href: "/contact" }
+                                { name: "All Medicines", href: "/AllMedicine" },
+                                { name: "Upload Prescription", href: "/#" },
+                                { name: "Health Tips", href: "/#" },
+                                { name: "Contact Us", href: "/#" }
                             ].map((link) => (
                                 <li key={link.name}>
                                     <Link
